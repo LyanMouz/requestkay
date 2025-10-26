@@ -1,0 +1,1033 @@
+<!DOCTYPE html><!DOCTYPE html><!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head><html lang="pt-BR"><html lang="pt-BR">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><head><head>
+
+    <title>Desenhe para Acessar</title>
+
+    <style>    <meta charset="UTF-8">  <meta charset="utf-8" />
+
+        :root {
+
+            --bg: #0f172a;    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+            --card: #0b1220;
+
+            --accent: #10b981;    <title>Desenhe a Melancia</title>  <title>Minhas 7 Maravilhas</title>
+
+            --pink: #ef4444;
+
+            --muted: #9ca3af;    <style>
+
+            --text: #e6eef8;        :root {
+
+        }            --bg: #0f172a;
+
+            --card: #0b1220;
+
+        html, body {            --accent: #10b981;
+
+            height: 100%;            --pink: #ef4444;
+
+            margin: 0;            --muted: #9ca3af;
+
+            font-family: Inter, system-ui, 'Segoe UI', Arial;            --text: #e6eef8;
+
+            background: linear-gradient(180deg, #071028 0%, #071b2a 100%);        }
+
+            color: var(--text);        
+
+        }        html, body {
+
+            height: 100%;
+
+        .wrap {            margin: 0;
+
+            max-width: 800px;            font-family: Inter, system-ui, 'Segoe UI', Arial;
+
+            margin: 36px auto;            background: linear-gradient(180deg, #071028 0%, #071b2a 100%);
+
+            padding: 24px;            color: var(--text);
+
+        }        }
+
+
+
+        .card {            --pink: #ff758f;    .wrap{max-width:960px;margin:36px auto;padding:24px}
+
+            background: var(--card);
+
+            padding: 30px;            --green: #4caf50;    h1{margin:0 0 12px;font-size:20px}
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 30px rgba(2,6,23,0.6);            --dark-green: #2e7d32;    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+
+        }
+
+            --bg: #fff5f5;    .canvas-wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+
+        h1 {
+
+            color: var(--text);            --text: #2c3e50;    /* make canvas responsive */
+
+            margin: 0 0 30px;
+
+            font-size: 24px;        }    .canvas-box{width:500px;max-width:100%;border-radius:10px;overflow:hidden}
+
+            text-align: center;
+
+        }    canvas{width:100%;height:auto;display:block;background:linear-gradient(180deg,#0b1220,#07121a);border-radius:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03);touch-action:none}
+
+
+
+        .canvas-wrap {        /* Estilos gerais */    .controls{display:flex;flex-direction:column;gap:8px}
+
+            display: flex;
+
+            gap: 24px;        * {    button{background:var(--accent);border:none;padding:10px 14px;border-radius:8px;color:#042018;font-weight:600;cursor:pointer}
+
+            flex-wrap: wrap;
+
+            align-items: flex-start;            margin: 0;    button.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+
+        }
+
+            padding: 0;    .muted{color:var(--muted);font-size:13px}
+
+        .canvas-box {
+
+            width: 500px;            box-sizing: border-box;
+
+            max-width: 100%;
+
+            border-radius: 15px;        }    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+
+            overflow: hidden;
+
+            background: linear-gradient(180deg, var(--card), #07121a);    .square{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700}
+
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+
+        }        body {    .hidden{display:none}
+
+
+
+        canvas {            font-family: 'Segoe UI', Arial, sans-serif;
+
+            width: 100%;
+
+            height: auto;            background-color: var(--bg);    .phrase-page{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;height:320px}
+
+            display: block;
+
+            touch-action: none;            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='%23fff5f5'/%3E%3Cpath d='M30 25a5 5 0 110 10 5 5 0 010-10z' fill='%23ff758f' opacity='.1'/%3E%3C/svg%3E");    .phrase{font-size:20px;color:#e6eef8;text-align:center;padding:0 12px}
+
+            background: transparent;
+
+        }            color: var(--text);    .small{font-size:13px;color:var(--muted)}
+
+
+
+        .controls {            min-height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;            display: flex;    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+            gap: 12px;
+
+            flex: 1;            flex-direction: column;
+
+            min-width: 200px;
+
+        }            align-items: center;    @media (max-width:680px){.grid{grid-template-columns:repeat(2,1fr)}.canvas-wrap{flex-direction:column-reverse} }
+
+
+
+        .color-picker {            padding: 20px;  </style>
+
+            background: rgba(255,255,255,0.03);
+
+            padding: 12px;        }</head>
+
+            border-radius: 10px;
+
+        }<body>
+
+
+
+        .color-picker label {        /* Container principal */  <div class="wrap card" id="page-draw">
+
+            display: block;
+
+            color: var(--muted);        .container {    <h1>Desenhe para acessar</h1>
+
+            font-size: 13px;
+
+            margin-bottom: 8px;            background: white;    <div class="canvas-wrap">
+
+        }
+
+            border-radius: 20px;      <div class="canvas-box">
+
+        input[type="color"] {
+
+            width: 100%;            padding: 30px;        <canvas id="userCanvas" width="500" height="360" role="img" aria-label="Área para desenhar"></canvas>
+
+            height: 40px;
+
+            border: 1px solid rgba(255,255,255,0.1);            box-shadow: 0 10px 30px rgba(0,0,0,0.1);        <div class="muted">Trace por cima do molde.</div>
+
+            border-radius: 8px;
+
+            background: var(--card);            max-width: 800px;      </div>
+
+            padding: 2px;
+
+        }            width: 100%;      <div class="controls">
+
+
+
+        button {            margin: 20px;        <label class="muted">Cor da tinta:</label>
+
+            background: var(--accent);
+
+            border: none;        }        <input type="color" id="colorPicker" value="#ffffff" />
+
+            padding: 12px 20px;
+
+            border-radius: 8px;        <button id="checkBtn">Verificar desenho</button>
+
+            color: #042018;
+
+            font-weight: 600;        /* Títulos */        <button class="ghost" id="clearBtn">Limpar</button>
+
+            cursor: pointer;
+
+            transition: transform 0.2s, box-shadow 0.2s;        h1 {      </div>
+
+        }
+
+            color: var(--pink);    </div>
+
+        button:hover {
+
+            transform: translateY(-2px);            text-align: center;  </div>
+
+            box-shadow: 0 4px 12px rgba(16,185,129,0.2);
+
+        }            margin-bottom: 30px;
+
+
+
+        button.ghost {            font-size: 2.5em;  <div class="wrap card hidden" id="page-grid">
+
+            background: transparent;
+
+            color: var(--muted);            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);    <h1>Escolha uma opção</h1>
+
+            border: 1px solid rgba(255,255,255,0.04);
+
+        }        }    <div class="grid" id="grid"></div>
+
+
+
+        .muted {    <div style="margin-top:12px"><button id="logout">Sair</button></div>
+
+            color: var(--muted);
+
+            font-size: 13px;        /* Área do Canvas */  </div>
+
+            text-align: center;
+
+            margin-top: 8px;        .canvas-container {
+
+        }
+
+            display: flex;  <div class="wrap card hidden" id="page-phrase">
+
+        .hidden {
+
+            display: none;            flex-direction: column;    <div class="phrase-page">
+
+        }
+
+            align-items: center;      <div class="phrase" id="phraseText"></div>
+
+        @media (max-width: 680px) {
+
+            .wrap {            gap: 20px;      <div class="small">Clique em voltar para ver as outras frases.</div>
+
+                margin: 16px auto;
+
+                padding: 16px;        }      <div><button id="backBtn" class="ghost">Voltar</button></div>
+
+            }
+
+                </div>
+
+            .canvas-wrap {
+
+                flex-direction: column-reverse;        #drawingCanvas {  </div>
+
+            }
+
+            border: 3px solid var(--pink);
+
+            .controls {
+
+                width: 100%;            border-radius: 15px;  <script>
+
+            }
+
+        }            background: white;    const PHRASES = [
+
+    </style>
+
+</head>            max-width: 100%;      'Frase 1: A melancia sorriu primeiro.',
+
+<body>
+
+    <div class="wrap card" id="page-draw">            touch-action: none;      'Frase 2: Quem corta a melancia encontra verão.',
+
+        <h1>Desenhe para acessar</h1>
+
+        <div class="canvas-wrap">        }      'Frase 3: Sementes são promessas no futuro.',
+
+            <div class="canvas-box">
+
+                <canvas id="userCanvas" width="500" height="360" role="img" aria-label="Área para desenhar"></canvas>      'Frase 4: Doce como segredo dividido.',
+
+                <div class="muted">Trace por cima do molde</div>
+
+            </div>        /* Controles do desenho */      'Frase 5: A casca guarda o melhor.',
+
+            <div class="controls">
+
+                <div class="color-picker">        .controls {      'Frase 6: Uma fatia para cada amigo.',
+
+                    <label>Cor da tinta:</label>
+
+                    <input type="color" id="colorPicker" value="#ef4444">            display: flex;      'Frase 7: O suco escorre como lembrança.'
+
+                </div>
+
+                <button id="checkBtn">Verificar desenho</button>            gap: 15px;    ];
+
+                <button class="ghost" id="clearBtn">Limpar</button>
+
+            </div>            flex-wrap: wrap;
+
+        </div>
+
+    </div>            justify-content: center;    const userCanvas = document.getElementById('userCanvas');
+
+
+
+    <script>        }    const uCtx = userCanvas.getContext('2d');
+
+        const userCanvas = document.getElementById('userCanvas');
+
+        const uCtx = userCanvas.getContext('2d');
+
+        const colorPicker = document.getElementById('colorPicker');
+
+        button {    // template image handling (relative paths OK for GitHub Pages)
+
+        // Template setup with embedded SVG
+
+        const templateImg = new Image();            padding: 12px 25px;    const templateImg = new Image();    function loadTemplate(){      templateImg.crossOrigin = 'anonymous';      templateImg.src = 'assets/melancia.png';      templateImg.onerror = () => { templateImg.onerror = null; templateImg.src = 'assets/melancia.svg'; };    }    const embeddedSVG = `<?xml version="1.0" encoding="UTF-8"?><svg xmlns='http://www.w3.org/2000/svg' width='500' height='360' viewBox='0 0 500 360'><ellipse cx='250' cy='180' rx='220' ry='130' fill='#0f7a2a'/><ellipse cx='250' cy='180' rx='200' ry='110' fill='#16a34a'/><ellipse cx='250' cy='180' rx='170' ry='95' fill='#ef4444'/><g fill='#111' opacity='0.95'><ellipse cx='200' cy='160' rx='6' ry='10' transform='rotate(-20 200 160)'/><ellipse cx='230' cy='140' rx='6' ry='10' transform='rotate(-10 230 140)'/><ellipse cx='270' cy='145' rx='6' ry='10' transform='rotate(10 270 145)'/><ellipse cx='300' cy='165' rx='6' ry='10' transform='rotate(20 300 165)'/><ellipse cx='250' cy='185' rx='6' ry='10' transform='rotate(0 250 185)'/></g></svg>`;
+
+        templateImg.src = "data:image/svg+xml," + encodeURIComponent(`
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="360" viewBox="0 0 500 360">            border: none;    templateImg.addEventListener('error', ()=>{ if(!templateImg.src.includes('data:')) templateImg.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(embeddedSVG); });
+
+                <ellipse cx="250" cy="180" rx="220" ry="130" fill="#0f7a2a"/>
+
+                <ellipse cx="250" cy="180" rx="200" ry="110" fill="#16a34a"/>            border-radius: 10px;    templateImg.addEventListener('load', ()=> drawOverlay());
+
+                <ellipse cx="250" cy="180" rx="170" ry="95" fill="#ef4444"/>
+
+                <g fill="#111" opacity="0.95">            background: var(--pink);
+
+                    <ellipse cx="200" cy="160" rx="6" ry="10" transform="rotate(-20 200 160)"/>
+
+                    <ellipse cx="230" cy="140" rx="6" ry="10" transform="rotate(-10 230 140)"/>            color: white;    // user drawing cache (kept in logical pixels and scaled for high-DPI)
+
+                    <ellipse cx="270" cy="145" rx="6" ry="10" transform="rotate(10 270 145)"/>
+
+                    <ellipse cx="300" cy="165" rx="6" ry="10" transform="rotate(20 300 165)"/>            font-size: 1.1em;    let userCache = document.createElement('canvas');
+
+                    <ellipse cx="250" cy="185" rx="6" ry="10"/>
+
+                </g>            cursor: pointer;    userCache.width = 500 * (window.devicePixelRatio || 1);
+
+            </svg>
+
+        `);            transition: transform 0.2s, box-shadow 0.2s;    userCache.height = 360 * (window.devicePixelRatio || 1);
+
+
+
+        // Drawing cache setup        }    let uc = userCache.getContext('2d');
+
+        let userCache = document.createElement('canvas');
+
+        userCache.width = 500 * (window.devicePixelRatio || 1);
+
+        userCache.height = 360 * (window.devicePixelRatio || 1);
+
+        let uc = userCache.getContext('2d');        button:hover {    // responsive/high-DPI canvas setup
+
+
+
+        // Canvas setup            transform: translateY(-2px);    function fitCanvasToContainer(){
+
+        function fitCanvas() {
+
+            const box = userCanvas.parentElement.getBoundingClientRect();            box-shadow: 0 5px 15px rgba(255,117,143,0.3);      const box = userCanvas.parentElement.getBoundingClientRect();
+
+            const cssWidth = Math.floor(box.width);
+
+            const cssHeight = Math.floor(cssWidth * 360/500);        }      const cssWidth = Math.floor(box.width);
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+                  // choose height by maintaining original aspect ratio (500x360)
+
+            userCanvas.width = cssWidth * dpr;
+
+            userCanvas.height = cssHeight * dpr;        /* Grid de opções */      const cssHeight = Math.floor(cssWidth * 360 / 500);
+
+            userCanvas.style.width = cssWidth + 'px';
+
+            userCanvas.style.height = cssHeight + 'px';        .grid-container {      // compute device pixels
+
+            
+
+            drawOverlay();            display: none;      const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+        }
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));      userCanvas.width = cssWidth * dpr;
+
+        // Draw template and user cache
+
+        function drawOverlay() {            gap: 20px;      userCanvas.height = cssHeight * dpr;
+
+            uCtx.clearRect(0, 0, userCanvas.width, userCanvas.height);
+
+            if(templateImg.complete) {            padding: 20px 0;      userCanvas.style.width = cssWidth + 'px';
+
+                const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+                const cssW = userCanvas.width / dpr;        }      userCanvas.style.height = cssHeight + 'px';
+
+                const cssH = userCanvas.height / dpr;
+
+                const scale = Math.min(cssW / templateImg.width, cssH / templateImg.height) * 0.6;      // capture old drawing to scale it into new cache
+
+                const w = templateImg.width * scale;
+
+                const h = templateImg.height * scale;        .card {      const oldCache = document.createElement('canvas');
+
+                const x = (cssW - w)/2;
+
+                const y = (cssH - h)/2;            background: white;      oldCache.width = userCache.width;
+
+                uCtx.save();
+
+                uCtx.scale(dpr, dpr);            border-radius: 15px;      oldCache.height = userCache.height;
+
+                uCtx.globalAlpha = 0.2;
+
+                uCtx.drawImage(templateImg, x, y, w, h);            padding: 25px;      const oldCtx = oldCache.getContext('2d');
+
+                uCtx.restore();
+
+            }            text-align: center;      oldCtx.drawImage(userCache, 0, 0);
+
+            
+
+            // Draw user cache            cursor: pointer;      // Redraw to apply the new size
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+            uCtx.save();            border: 2px solid var(--pink);      drawOverlay();
+
+            uCtx.globalAlpha = 0.75;
+
+            uCtx.scale(1/dpr, 1/dpr);            transition: transform 0.3s, box-shadow 0.3s;    }
+
+            uCtx.drawImage(userCache, 0, 0);
+
+            uCtx.restore();            position: relative;    document.getElementById('logout').addEventListener('click', ()=>{
+
+        }
+
+            overflow: hidden;      uc.clearRect(0,0,userCache.width,userCache.height); redraw();
+
+        // Drawing variables
+
+        let drawing = false;        }      document.getElementById('page-grid').classList.add('hidden');
+
+        let last = null;
+
+              document.getElementById('page-draw').classList.remove('hidden');
+
+        // Convert pointer event to canvas coordinates
+
+        function getPointerPos(e) {        .card::before {    });
+
+            const rect = userCanvas.getBoundingClientRect();
+
+            const x = (e.clientX !== undefined) ? (e.clientX - rect.left) : (e.touches ? e.touches[0].clientX - rect.left : 0);            content: '';
+
+            const y = (e.clientY !== undefined) ? (e.clientY - rect.top) : (e.touches ? e.touches[0].clientY - rect.top : 0);
+
+            return { x, y };            position: absolute;    // Initialize template loading and handle window resizing
+
+        }
+
+            top: 0;    loadTemplate();
+
+        // Drawing handlers
+
+        function startDrawing(e) {            left: 0;    window.addEventListener('resize', fitCanvasToContainer);
+
+            if(typeof TouchEvent !== 'undefined' && e instanceof TouchEvent) e.preventDefault();
+
+            drawing = true;            right: 0;    fitCanvasToContainer(); // Initial setup
+
+            last = getPointerPos(e);
+
+            if(e.pointerId !== undefined && e.target && e.target.setPointerCapture) {            bottom: 0;    
+
+                try { e.target.setPointerCapture(e.pointerId); } catch(err) {}
+
+            }            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 40a10 10 0 110 20 10 10 0 010-20z' fill='%23ff758f' opacity='.1'/%3E%3C/svg%3E");    document.getElementById('clearBtn').addEventListener('click', ()=>{ 
+
+            document.body.style.touchAction = 'none';
+
+        }            opacity: 0.2;      uc.clearRect(0,0,userCache.width,userCache.height); 
+
+
+
+        function draw(e) {            z-index: 0;      drawOverlay(); 
+
+            if(!drawing) return;
+
+            if(typeof TouchEvent !== 'undefined' && e instanceof TouchEvent) e.preventDefault();        }    });
+
+            
+
+            const p = getPointerPos(e);
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+            const pressure = (e.pressure !== undefined) ? e.pressure :         .card:hover {    // computeMatch simplified: overlap vs fixed threshold (30%)
+
+                           (e.touches && e.touches[0] && e.touches[0].force) ? e.touches[0].force : 0.5;
+
+                        transform: translateY(-5px);    function computeMatch(){
+
+            const width = Math.max(2, 18 * (0.8 + pressure * 0.7)) * dpr;
+
+                        box-shadow: 0 10px 20px rgba(255,117,143,0.2);      if(!templateImg.complete) return {overlapRatio:0};
+
+            uc.beginPath();
+
+            uc.strokeStyle = colorPicker.value;        }      const tempCanvas = document.createElement('canvas');
+
+            uc.lineWidth = width;
+
+            uc.lineCap = 'round';      tempCanvas.width = userCache.width; tempCanvas.height = userCache.height;
+
+            uc.lineJoin = 'round';
+
+                    .card h2 {      const tCtx = tempCanvas.getContext('2d');
+
+            const sx = p.x * dpr, sy = p.y * dpr;
+
+            const lx = last.x * dpr, ly = last.y * dpr;            color: var(--pink);      const cssW = userCanvas.width / (window.devicePixelRatio || 1);
+
+            
+
+            uc.moveTo(lx, ly);            margin-bottom: 15px;      const cssH = userCanvas.height / (window.devicePixelRatio || 1);
+
+            uc.lineTo(sx, sy);
+
+            uc.stroke();            position: relative;      const scale = Math.min(cssW / templateImg.width, cssH / templateImg.height) * 0.6;
+
+            
+
+            last = p;            z-index: 1;      const w = templateImg.width * scale;
+
+            drawOverlay();
+
+        }        }      const h = templateImg.height * scale;
+
+
+
+        function endDrawing(e) {      const x = (cssW - w)/2;
+
+            drawing = false;
+
+            last = null;        .card p {      const y = (cssH - h)/2;
+
+            document.body.style.touchAction = '';
+
+        }            color: var(--text);      const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+
+
+        // Event listeners            font-size: 1.1em;      tCtx.save();
+
+        userCanvas.addEventListener('pointerdown', startDrawing);
+
+        userCanvas.addEventListener('pointermove', draw);            position: relative;      tCtx.scale(dpr, dpr);
+
+        window.addEventListener('pointerup', endDrawing);
+
+        userCanvas.addEventListener('pointerup', (e) => {            z-index: 1;      tCtx.drawImage(templateImg, x, y, w, h);
+
+            try {
+
+                if(e.pointerId !== undefined && e.target && e.target.releasePointerCapture) {        }      tCtx.restore();
+
+                    e.target.releasePointerCapture(e.pointerId);
+
+                }
+
+            } catch(err) {}
+
+        });        /* Audio player */      const tData = tCtx.getImageData(0,0,tempCanvas.width,tempCanvas.height).data;
+
+
+
+        // Verify drawing        .audio-player {      const uData = uc.getImageData(0,0,userCache.width,userCache.height).data;
+
+        document.getElementById('checkBtn').addEventListener('click', () => {
+
+            const res = computeMatch();            width: 100%;      let totalPixels = 0, matchedPixels = 0;
+
+            if(res.overlapRatio >= 0.30) {
+
+                window.location.href = 'grid.html';            margin-top: 15px;      for(let i=0;i<tData.length;i+=4){
+
+            } else {
+
+                alert('Continue tentando! Trace melhor a melancia... (' + Math.round(res.overlapRatio*100) + '%)');        }        if(tData[i+3]>10){ totalPixels++; if(uData[i+3]>10) matchedPixels++; }
+
+            }
+
+        });      }
+
+
+
+        // Clear drawing        /* Responsividade */      const overlapRatio = totalPixels ? (matchedPixels / totalPixels) : 0;
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+
+            uc.clearRect(0, 0, userCache.width, userCache.height);        @media (max-width: 600px) {      return {overlapRatio};
+
+            drawOverlay();
+
+        });            .container {    }
+
+
+
+        // Check drawing overlap                padding: 20px;
+
+        function computeMatch() {
+
+            if(!templateImg.complete) return {overlapRatio: 0};                margin: 10px;    document.getElementById('checkBtn').addEventListener('click', ()=>{
+
+            
+
+            const tempCanvas = document.createElement('canvas');            }      const res = computeMatch();
+
+            tempCanvas.width = userCache.width;
+
+            tempCanvas.height = userCache.height;      const THRESHOLD = 0.30; // 30% overlap required
+
+            const tCtx = tempCanvas.getContext('2d');
+
+                        h1 {      if(res.overlapRatio >= THRESHOLD){ showGrid(); } else { alert('Desenho não confere com a melancia. (Overlap: '+(Math.round(res.overlapRatio*100))+'%)'); }
+
+            const cssW = userCanvas.width / (window.devicePixelRatio || 1);
+
+            const cssH = userCanvas.height / (window.devicePixelRatio || 1);                font-size: 2em;    });
+
+            const scale = Math.min(cssW / templateImg.width, cssH / templateImg.height) * 0.6;
+
+            const w = templateImg.width * scale;            }
+
+            const h = templateImg.height * scale;
+
+            const x = (cssW - w)/2;    // draw user and template images for comparison
+
+            const y = (cssH - h)/2;
+
+            const dpr = Math.max(1, window.devicePixelRatio || 1);            .controls {    function drawOverlay(){
+
+            
+
+            tCtx.save();                flex-direction: column;      // redraw template + user cache to visible canvas (CSS pixels)
+
+            tCtx.scale(dpr, dpr);
+
+            tCtx.drawImage(templateImg, x, y, w, h);            }      uCtx.setTransform(1,0,0,1,0,0);
+
+            tCtx.restore();
+
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+            const tData = tCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data;
+
+            const uData = uc.getImageData(0, 0, userCache.width, userCache.height).data;            button {      uCtx.clearRect(0,0,userCanvas.width, userCanvas.height);
+
+            let totalPixels = 0, matchedPixels = 0;
+
+                            width: 100%;      // draw template at CSS-coordinate space (so overlay scales with canvas CSS size)
+
+            for(let i = 0; i < tData.length; i += 4) {
+
+                if(tData[i + 3] > 10) {            }      if(templateImg.complete){
+
+                    totalPixels++;
+
+                    if(uData[i + 3] > 10) matchedPixels++;        }        const cssW = userCanvas.width / dpr;
+
+                }
+
+            }    </style>        const cssH = userCanvas.height / dpr;
+
+            
+
+            return {overlapRatio: totalPixels ? (matchedPixels / totalPixels) : 0};</head>        const scale = Math.min(cssW / templateImg.width, cssH / templateImg.height) * 0.6;
+
+        }
+
+<body>        const w = templateImg.width * scale;
+
+        // Initialize
+
+        templateImg.addEventListener('load', fitCanvas);    <!-- Página do Desenho -->        const h = templateImg.height * scale;
+
+        window.addEventListener('resize', fitCanvas);
+
+        fitCanvas();    <div class="container" id="drawPage">        const x = (cssW - w)/2;
+
+    </script>
+
+</body>        <h1>Desenhe a Melancia para Continuar</h1>        const y = (cssH - h)/2;
+
+</html>
+        <div class="canvas-container">        uCtx.save();
+
+            <canvas id="drawingCanvas" width="500" height="360"></canvas>        uCtx.scale(dpr, dpr);
+
+            <div class="controls">        uCtx.globalAlpha = 0.2;  // Reduced opacity to make it more visible as a guide
+
+                <button id="checkDrawing">Verificar Desenho</button>        uCtx.drawImage(templateImg, x, y, w, h);
+
+                <button id="clearDrawing">Limpar</button>        uCtx.globalAlpha = 1.0;
+
+            </div>        uCtx.restore();
+
+        </div>      }
+
+    </div>      // draw user cache (backing pixels) scaled down to CSS pixels with 75% opacity
+
+      uCtx.save();
+
+    <!-- Página das 7 Maravilhas -->      uCtx.globalAlpha = 0.75; // drawing opacity set to 75%
+
+    <div class="container" id="gridPage" style="display: none;">      uCtx.scale(1/dpr, 1/dpr);
+
+        <h1>Minhas 7 Maravilhas</h1>      uCtx.drawImage(userCache, 0, 0);
+
+        <div class="grid-container">      uCtx.restore();
+
+            <div class="card" onclick="showMessage('Você é a pessoa mais especial do mundo! ❤️')">    }
+
+                <h2>Você</h2>
+
+                <p>Clique para ver...</p>    // clear user drawing and reset
+
+            </div>    document.getElementById('clearBtn').addEventListener('click', ()=>{
+
+            <div class="card" onclick="showMessage('Seus olhos são como estrelas que iluminam meu dia! ✨')">      uc.clearRect(0,0,userCache.width,userCache.height);
+
+                <h2>Seus olhos</h2>      uCtx.clearRect(0,0,500,360);
+
+                <p>Clique para ver...</p>      redraw();
+
+            </div>    });
+
+            <div class="card" onclick="showMessage('Sua risada é a melodia mais bonita que já ouvi! 🎵')">
+
+                <h2>Sua risada</h2>    // redraw from user cache (on demand)
+
+                <p>Clique para ver...</p>    function redraw(){
+
+            </div>      // Clear the canvas first
+
+            <div class="card" id="musicCard">      uCtx.clearRect(0, 0, userCanvas.width, userCanvas.height);
+
+                <h2>Nossa música</h2>      // Draw the template and user cache
+
+                <p>Clique para ouvir...</p>      drawOverlay();
+
+                <audio id="musicPlayer" class="audio-player" controls>    }
+
+                    <source src="assets/music.mp3" type="audio/mp3">
+
+                    Seu navegador não suporta áudio.    // user drawing input handling
+
+                </audio>    let drawing = false, last = null, drawColor = '#ffffff';
+
+            </div>    document.getElementById('colorPicker').addEventListener('input', e => drawColor = e.target.value);
+
+            <div class="card" onclick="showMessage('Seu jeito fofo me encanta cada dia mais! 🥰')">
+
+                <h2>Seu jeito fofo</h2>    // helper: convert pointer event to canvas logical coordinates (CSS pixels)
+
+                <p>Clique para ver...</p>    function getPointerPos(e){
+
+            </div>      const rect = userCanvas.getBoundingClientRect();
+
+            <div class="card" onclick="showMessage('Seu jeito sapeca me faz sorrir sempre! 😊')">      const x = (e.clientX !== undefined) ? (e.clientX - rect.left) : (e.touches ? e.touches[0].clientX - rect.left : 0);
+
+                <h2>Seu jeito sapeca</h2>      const y = (e.clientY !== undefined) ? (e.clientY - rect.top) : (e.touches ? e.touches[0].clientY - rect.top : 0);
+
+                <p>Clique para ver...</p>      return { x, y };
+
+            </div>    }
+
+            <div class="card" onclick="showMessage('Você é tudo que eu sempre sonhei... ❤️\n\nQuer namorar comigo? 💍')">
+
+                <h2>Tudo que há em você</h2>    function pointerStart(e){
+
+                <p>Quer namorar comigo?</p>      if(typeof TouchEvent !== 'undefined' && e instanceof TouchEvent) e.preventDefault();
+
+            </div>      drawing = true; last = getPointerPos(e);
+
+        </div>      if(e.pointerId !== undefined && e.target && e.target.setPointerCapture){
+
+    </div>        try{ e.target.setPointerCapture(e.pointerId); }catch(err){}
+
+      }
+
+    <script>      document.body.style.touchAction = 'none';
+
+        // Elementos do DOM    }
+
+        const canvas = document.getElementById('drawingCanvas');    function pointerMove(e){
+
+        const ctx = canvas.getContext('2d');      if(!drawing) return;
+
+        const drawPage = document.getElementById('drawPage');      if(typeof TouchEvent !== 'undefined' && e instanceof TouchEvent) e.preventDefault();
+
+        const gridPage = document.getElementById('gridPage');      const p = getPointerPos(e);
+
+        const checkButton = document.getElementById('checkDrawing');      const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+        const clearButton = document.getElementById('clearDrawing');      const pressure = (e.pressure !== undefined) ? e.pressure : (e.touches && e.touches[0] && e.touches[0].force) ? e.touches[0].force : 0.5;
+
+      const baseWidth = 18;
+
+        // Configuração da melancia template      const lineW = Math.max(2, baseWidth * (0.8 + pressure*0.7));
+
+        const watermelonTemplate = new Image();      uc.strokeStyle = drawColor; uc.lineWidth = lineW * dpr; uc.lineCap = 'round'; uc.lineJoin = 'round';
+
+        watermelonTemplate.src = "data:image/svg+xml," + encodeURIComponent(`      uc.globalAlpha = 0.75;
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="360" viewBox="0 0 500 360">      const sx = p.x * dpr, sy = p.y * dpr, lx = last.x * dpr, ly = last.y * dpr;
+
+                <ellipse cx="250" cy="180" rx="220" ry="130" fill="#2e7d32"/>      uc.beginPath(); uc.moveTo(lx, ly); uc.lineTo(sx, sy); uc.stroke();
+
+                <ellipse cx="250" cy="180" rx="200" ry="110" fill="#4caf50"/>      uc.globalAlpha = 1.0;
+
+                <ellipse cx="250" cy="180" rx="170" ry="95" fill="#ff758f"/>      last = p; drawOverlay();
+
+                <g fill="#111" opacity="0.95">    }
+
+                    <ellipse cx="200" cy="160" rx="6" ry="10" transform="rotate(-20 200 160)"/>    function pointerEnd(e){ drawing = false; last = null; document.body.style.touchAction = ''; }
+
+                    <ellipse cx="230" cy="140" rx="6" ry="10" transform="rotate(-10 230 140)"/>
+
+                    <ellipse cx="270" cy="145" rx="6" ry="10" transform="rotate(10 270 145)"/>    // attach pointer events (pointer events cover mouse/touch/stylus on modern browsers)
+
+                    <ellipse cx="300" cy="165" rx="6" ry="10" transform="rotate(20 300 165)"/>    userCanvas.addEventListener('pointerdown', (e)=>{ e.preventDefault(); pointerStart(e); }, {passive:false});
+
+                    <ellipse cx="250" cy="185" rx="6" ry="10"/>    userCanvas.addEventListener('pointermove', (e)=>{ pointerMove(e); }, {passive:false});
+
+                </g>    window.addEventListener('pointerup', (e)=>{ pointerEnd(e); }, {passive:false});
+
+            </svg>    userCanvas.addEventListener('pointerup', (e)=>{ try{ if(e.pointerId!==undefined && e.target && e.target.releasePointerCapture){ e.target.releasePointerCapture(e.pointerId); } }catch(err){} }, {passive:false});
+
+        `);    userCanvas.addEventListener('touchstart', (e)=>{ if(!window.PointerEvent) { pointerStart(e); } }, {passive:false});
+
+    userCanvas.addEventListener('touchmove', (e)=>{ if(!window.PointerEvent) { pointerMove(e); } }, {passive:false});
+
+        // Variáveis do desenho    window.addEventListener('touchend', (e)=>{ if(!window.PointerEvent) { pointerEnd(e); } });
+
+        let isDrawing = false;
+
+        let lastX = 0;    // remove old mouse/touch listeners that drew on uCtx
+
+        let lastY = 0;
+        let userDrawing = document.createElement('canvas');
+        let userCtx = userDrawing.getContext('2d');
+        userDrawing.width = canvas.width;
+        userDrawing.height = canvas.height;
+
+        // Configuração inicial do canvas
+        function setupCanvas() {
+            // Ajusta o tamanho do canvas para dispositivos de alta resolução
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = 500 * dpr;
+            canvas.height = 360 * dpr;
+            canvas.style.width = "500px";
+            canvas.style.height = "360px";
+            ctx.scale(dpr, dpr);
+
+            // Desenha o template
+            watermelonTemplate.onload = () => {
+                ctx.globalAlpha = 0.2;
+                ctx.drawImage(watermelonTemplate, 0, 0, canvas.width, canvas.height);
+                ctx.globalAlpha = 1;
+            };
+        }
+
+        // Funções de desenho
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = getMousePos(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+
+            const [x, y] = getMousePos(e);
+            
+            userCtx.beginPath();
+            userCtx.lineWidth = 5;
+            userCtx.lineCap = 'round';
+            userCtx.strokeStyle = '#ff758f';
+            userCtx.moveTo(lastX, lastY);
+            userCtx.lineTo(x, y);
+            userCtx.stroke();
+
+            // Atualiza o canvas principal
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 0.2;
+            ctx.drawImage(watermelonTemplate, 0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 1;
+            ctx.drawImage(userDrawing, 0, 0);
+
+            [lastX, lastY] = [x, y];
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        // Função para obter posição do mouse/toque
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            const x = ((e.clientX || e.touches[0].clientX) - rect.left) * scaleX;
+            const y = ((e.clientY || e.touches[0].clientY) - rect.top) * scaleY;
+            
+            return [x, y];
+        }
+
+        // Verifica se o desenho está correto
+        function checkDrawing() {
+            const pixelMatch = 0.3; // 30% de correspondência necessária
+            const templateData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            const userData = userCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+            
+            let matchingPixels = 0;
+            let totalPixels = 0;
+
+            for (let i = 0; i < templateData.length; i += 4) {
+                if (templateData[i + 3] > 0) {
+                    totalPixels++;
+                    if (userData[i + 3] > 0) {
+                        matchingPixels++;
+                    }
+                }
+            }
+
+            const matchRatio = matchingPixels / totalPixels;
+            if (matchRatio >= pixelMatch) {
+                showGridPage();
+            } else {
+                alert('Continue tentando! Trace melhor a melancia...');
+            }
+        }
+
+        // Mostra a página do grid
+        function showGridPage() {
+            drawPage.style.display = 'none';
+            gridPage.style.display = 'block';
+            document.querySelector('.grid-container').style.display = 'grid';
+        }
+
+        // Mostra mensagem quando clica nos cards
+        function showMessage(message) {
+            alert(message);
+        }
+
+        // Event Listeners
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Suporte a touch
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startDrawing(e.touches[0]);
+        });
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            draw(e.touches[0]);
+        });
+        canvas.addEventListener('touchend', stopDrawing);
+
+        // Botões
+        checkButton.addEventListener('click', checkDrawing);
+        clearButton.addEventListener('click', () => {
+            userCtx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 0.2;
+            ctx.drawImage(watermelonTemplate, 0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 1;
+        });
+
+        // Inicialização
+        setupCanvas();
+
+        // Configuração do áudio
+        const musicCard = document.getElementById('musicCard');
+        const musicPlayer = document.getElementById('musicPlayer');
+        
+        musicCard.addEventListener('click', () => {
+            musicPlayer.play();
+        });
+    </script>
+</body>
+</html>

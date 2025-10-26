@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenhe para Acessar</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #0b1220;
+            --accent: #10b981;
+            --pink: #ef4444;
+            --muted: #9ca3af;
+            --text: #e6eef8;
+        }
+
+        @keyframes fall {
+            0% { 
+                transform: translateY(-150px) rotate(0deg);
+            }
+            100% { 
+                transform: translateY(calc(100vh + 150px)) rotate(var(--rotation));
+            }
+        }
+
+        @keyframes bounce {
+            0% { 
+                transform: translateY(var(--y)) rotate(var(--r));
+            }
+            50% { 
+                transform: translateY(calc(var(--y) - 200px)) rotate(calc(var(--r) + 180deg));
+            }
+            100% { 
+                transform: translateY(var(--y)) rotate(calc(var(--r) + 360deg));
+            }
+        }
+
+        .watermelon {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            z-index: 1;
+            cursor: pointer;
+            pointer-events: auto;
+            user-select: none;
+            touch-action: manipulation;
+            top: 0;
+            will-change: transform;
+            transform-origin: center center;
+        }
+
+        .watermelon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .music-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .music-button:hover {
+            transform: scale(1.1);
+        }
+
+        .music-button.paused .music-icon {
+            opacity: 0.7;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .audio-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .volume-slider {
+                width: 60px;
+            }
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, 'Segoe UI', Arial;
+            background: linear-gradient(180deg, #ff8b8b, #ff6b6b);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .wrap {
+            max-width: 800px;
+            margin: 36px auto;
+            padding: 24px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+        }
+
+        h1 {
+            color: var(--text);
+            margin: 0 0 30px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .canvas-wrap {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .canvas-box {
+            width: 500px;
+            max-width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--card), #07121a);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+            touch-action: none;
+            background: transparent;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .color-picker {
+            background: rgba(255,255,255,0.03);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .color-picker label {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            background: var(--card);
+            padding: 2px;
+        }
+
+        button {
+            background: var(--accent);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: #042018;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.2);
+        }
+
+        button.ghost {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 680px) {
+            .wrap {
+                margin: 16px auto;
+                padding: 16px;
+            }
+            
+            .canvas-wrap {
+                flex-direction: column-reverse;
+            }
+
+            .controls {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-controls">
+        <audio id="bgMusic" loop>
+            <source src="assets/8bitcute.mp3" type="audio/mp3">
+        </audio>
+        <button id="musicToggle" class="music-button">
+            <span class="music-icon">🎵</span>
+        </button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+    </div>
+    <div class="wrap card" id="page-draw">
+        <h1>Desenhe para acessar</h1>
+        <div class="canvas-wrap">
+            <div class="canvas-box">
+                <canvas id="userCanvas" width="500" height="360" role="img" aria-label="Área para desenhar"></canvas>
+                <div class="muted">Trace por cima do molde</div>
+            </div>
+            <div class="controls">
+                <div class="color-picker">
+                    <label>Cor da tinta:</label>
+                    <input type="color" id="colorPicker" value="#ef4444">
+                </div>
+                <div class="brush-size">
+                    <label>Tamanho do pincel:</label>
+                    <input type="range" id="brushSize" min="1" max="50" value="18" class="slider">
+                    <div class="size-preview"></div>
+                </div>
+                <button id="checkBtn">Verificar desenho</button>
+                <button class="ghost" id="clearBtn">Limpar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userCanvas = document.getElementById('userCanvas');
+        const uCtx = userCanvas.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+        const brushSizeInput = document.getElementById('brushSize');
+        const sizePreview = document.querySelector('.size-preview');
+
+        // Template setup with embedded SVG
+        const templateImg = new Image();
+        templateImg.src = "data:image/svg+xml," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="360" viewBox="0 0 500 360">
+                <ellipse cx="250" cy="180" rx="220" ry="130" fill="#0f7a2a"/>
+                <ellipse cx="250" cy="180" rx="200" ry="110" fill="#16a34a"/>
+                <ellipse cx="250" cy="180" rx="170" ry="95" fill="#ef4444"/>
+                <g fill="#111" opacity="0.95">
+                    <ellipse cx="200" cy="160" rx="6" ry="10" transform="rotate(-20 200 160)"/>
+                    <ellipse cx="230" cy="140" rx="6" ry="10" transform="rotate(-10 230 140)"/>
+                    <ellipse cx="270" cy="145" rx="6" ry="10" transform="rotate(10 270 145)"/>
+                    <ellipse cx="300" cy="165" rx="6" ry="10" transform="rotate(20 300 165)"/>
+                    <ellipse cx="250" cy="185" rx="6" ry="10"/>
+                </g>
+            </svg>
+        `);
+
+        // Drawing cache setup
+        let userCache = document.createElement('canvas');
+        userCache.width = userCanvas.width;
+        userCache.height = userCanvas.height;
+        let uc = userCache.getContext('2d');
+
+        // Canvas setup
+        function fitCanvas() {
+            const box = userCanvas.parentElement.getBoundingClientRect();
+            const cssWidth = Math.floor(box.width);
+            const cssHeight = Math.floor(cssWidth * 360/500);
+            
+            // Define o tamanho visual do canvas
+            userCanvas.style.width = cssWidth + 'px';
+            userCanvas.style.height = cssHeight + 'px';
+            
+            // Define o tamanho real do canvas
+            userCanvas.width = cssWidth;
+            userCanvas.height = cssHeight;
+            
+            // Redefine o cache com o novo tamanho
+            userCache.width = cssWidth;
+            userCache.height = cssHeight;
+            
+            drawOverlay();
+        }
+
+        // Draw template and user cache
+        function drawOverlay() {
+            uCtx.clearRect(0, 0, userCanvas.width, userCanvas.height);
+            
+            if(templateImg.complete) {
+                const cssW = userCanvas.width;
+                const cssH = userCanvas.height;
+                const scale = Math.min(cssW / templateImg.width, cssH / templateImg.height) * 0.6;
+                const w = templateImg.width * scale;
+                const h = templateImg.height * scale;
+                const x = (cssW - w)/2;
+                const y = (cssH - h)/2;
+                
+                uCtx.globalAlpha = 0.2;
+                uCtx.drawImage(templateImg, x, y, w, h);
+                uCtx.globalAlpha = 1;
+            }
+            
+            // Draw user cache
+            uCtx.globalAlpha = 0.75;
+            uCtx.drawImage(userCache, 0, 0);
+            uCtx.globalAlpha = 1;
+        }
+
+        // Update brush size preview
+        function updateSizePreview() {
+            const size = brushSizeInput.value;
+            sizePreview.style.width = size + 'px';
+            sizePreview.style.height = size + 'px';
+        }
+        
+        brushSizeInput.addEventListener('input', updateSizePreview);
+        updateSizePreview();
+
+        // Drawing variables
+        let drawing = false;
+        let last = null;
+        
+        // Convert pointer event to canvas coordinates
+        function getPointerPos(e) {
+            const rect = userCanvas.getBoundingClientRect();
+            let x, y;
+
+            if (e.touches && e.touches.length > 0) {
+                x = e.touches[0].clientX - rect.left;
+                y = e.touches[0].clientY - rect.top;
+            } else {
+                x = e.clientX - rect.left;
+                y = e.clientY - rect.top;
+            }
+
+            // Converte as coordenadas para o espaço do canvas
+            x = (x * userCanvas.width) / rect.width;
+            y = (y * userCanvas.height) / rect.height;
+            
+            return { x, y };
+        }
+
+        // Drawing handlers
+        function startDrawing(e) {
+            e.preventDefault();
+            drawing = true;
+            last = getPointerPos(e);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function draw(e) {
+            if(!drawing) return;
+            e.preventDefault();
+            
+            const p = getPointerPos(e);
+            const pressure = (e.pressure !== undefined) ? e.pressure : 
+                           (e.touches && e.touches[0] && e.touches[0].force) ? e.touches[0].force : 0.5;
+            
+            const baseBrushSize = parseInt(brushSizeInput.value);
+            const width = Math.max(2, baseBrushSize * (0.8 + pressure * 0.7));
+            
+            uc.beginPath();
+            uc.strokeStyle = colorPicker.value;
+            uc.lineWidth = width;
+            uc.lineCap = 'round';
+            uc.lineJoin = 'round';
+            uc.moveTo(last.x, last.y);
+            uc.lineTo(p.x, p.y);
+            uc.stroke();
+            
+            last = p;
+            drawOverlay();
+        }
+
+        function endDrawing(e) {
+            drawing = false;
+            last = null;
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners for touch and mouse
+        if ('ontouchstart' in window) {
+            userCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+            userCanvas.addEventListener('touchmove', draw, { passive: false });
+            userCanvas.addEventListener('touchend', endDrawing);
+            userCanvas.addEventListener('touchcancel', endDrawing);
+        }
+        
+        userCanvas.addEventListener('mousedown', startDrawing);
+        userCanvas.addEventListener('mousemove', draw);
+        window.addEventListener('mouseup', endDrawing);
+        
+        // Prevent unwanted gestures
+        userCanvas.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Verify drawing
+        document.getElementById('checkBtn').addEventListener('click', () => {
+            const res = computeMatch();
+            if(res.overlapRatio >= 0.30) {
+                window.location.href = 'grid.html';
+            } else {
+                alert('Continue tentando! Trace melhor a melancia... (' + Math.round(res.overlapRatio*100) + '%)');
+            }
+        });
+
+        // Clear drawing
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            uc.clearRect(0, 0, userCache.width, userCache.height);
+            drawOverlay();
+        });
+
+        // Check drawing overlap
+        function computeMatch() {
+            if(!templateImg.complete) return {overlapRatio: 0};
+            
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = userCache.width;
+            tempCanvas.height = userCache.height;
+            const tCtx = tempCanvas.getContext('2d');
+            
+            const cssW = userCanvas.width;
+            const cssH = userCanvas.height;
+            const scale = Math.min(cssW / templateImg.width, cssH / templateImg.height) * 0.6;
+            const w = templateImg.width * scale;
+            const h = templateImg.height * scale;
+            const x = (cssW - w)/2;
+            const y = (cssH - h)/2;
+            
+            tCtx.drawImage(templateImg, x, y, w, h);
+            
+            const tData = tCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data;
+            const uData = uc.getImageData(0, 0, userCache.width, userCache.height).data;
+            let totalPixels = 0, matchedPixels = 0;
+            
+            for(let i = 0; i < tData.length; i += 4) {
+                if(tData[i + 3] > 10) {
+                    totalPixels++;
+                    if(uData[i + 3] > 10) matchedPixels++;
+                }
+            }
+            
+            return {overlapRatio: totalPixels ? (matchedPixels / totalPixels) : 0};
+        }
+
+        // Initialize
+        templateImg.addEventListener('load', fitCanvas);
+        window.addEventListener('resize', fitCanvas);
+        fitCanvas();
+    </script>
+
+    <script>
+        // Background Music Control
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let isPlaying = false;
+
+        // Iniciar música com o primeiro clique na página
+        document.addEventListener('click', function startAudio() {
+            if (!isPlaying) {
+                bgMusic.volume = volumeSlider.value / 100;
+                bgMusic.play()
+                    .then(() => {
+                        isPlaying = true;
+                        musicToggle.classList.remove('paused');
+                    })
+                    .catch(console.error);
+                document.removeEventListener('click', startAudio);
+            }
+        }, { once: true });
+
+        // Controle de Play/Pause
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicToggle.classList.remove('paused');
+            } else {
+                bgMusic.pause();
+                musicToggle.classList.add('paused');
+            }
+        });
+
+        // Controle de Volume
+        volumeSlider.addEventListener('input', () => {
+            bgMusic.volume = volumeSlider.value / 100;
+        });
+    </script>
+
+    <script>
+        // Watermelon animation
+        function createWatermelon() {
+            const watermelon = document.createElement('div');
+            watermelon.className = 'watermelon';
+            
+            // Create SVG watermelon
+            watermelon.innerHTML = `
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#4caf50"/>
+                    <circle cx="50" cy="50" r="40" fill="#ff6b6b"/>
+                    <circle cx="35" cy="45" r="3" fill="black" opacity="0.7"/>
+                    <circle cx="50" cy="40" r="3" fill="black" opacity="0.7"/>
+                    <circle cx="65" cy="45" r="3" fill="black" opacity="0.7"/>
+                    <circle cx="42" cy="55" r="3" fill="black" opacity="0.7"/>
+                    <circle cx="58" cy="55" r="3" fill="black" opacity="0.7"/>
+                </svg>
+            `;
+
+            // Random starting position
+            const startX = Math.random() * (window.innerWidth - 60); // 60 é a largura da melancia
+            const rotation = Math.random() * 360;
+            const duration = 5 + Math.random() * 5; // Random duration between 5-10s
+
+            watermelon.style.setProperty('--rotation', `${rotation}deg`);
+            watermelon.style.left = `${startX}px`;
+            watermelon.style.animation = `fall ${duration}s linear forwards`;
+            watermelon.style.top = '-150px';
+
+            // Handle click/tap
+            watermelon.addEventListener('click', (e) => {
+                e.preventDefault();
+                bounce(watermelon);
+            });
+            watermelon.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                bounce(watermelon);
+            }, { passive: false });
+
+            document.body.appendChild(watermelon);
+
+            // Remove watermelon when animation ends
+            watermelon.addEventListener('animationend', () => {
+                document.body.removeChild(watermelon);
+                createWatermelon(); // Create a new one to replace it
+            });
+        }
+
+        function bounce(watermelon) {
+            // Pause falling animation
+            watermelon.style.animation = 'none';
+            
+            // Get current position
+            const rect = watermelon.getBoundingClientRect();
+            watermelon.style.setProperty('--y', `${rect.top}px`);
+            watermelon.style.setProperty('--r', `${Math.random() * 360}deg`);
+            
+            // Apply bounce animation
+            watermelon.style.animation = 'bounce 1s cubic-bezier(0.36, 0, 0.66, -0.56)';
+            
+            // Resume falling after bounce
+            setTimeout(() => {
+                const duration = 5 + Math.random() * 5;
+                const rotation = Math.random() * 360;
+                watermelon.style.setProperty('--rotation', `${rotation}deg`);
+                watermelon.style.animation = `fall ${duration}s linear forwards`;
+            }, 1000);
+        }
+
+        // Create initial watermelons
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => createWatermelon(), i * 1000);
+        }
+
+        // Create new watermelons periodically
+        setInterval(() => {
+            if (document.querySelectorAll('.watermelon').length < 5) {
+                createWatermelon();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

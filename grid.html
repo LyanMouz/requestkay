@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Mensagens Especiais</title>
+    <style>
+        :root {
+            --bg: #ff6b6b;
+            --card: rgba(255, 133, 133, 0.7);
+            --accent: #4caf50;
+            --border: #2e7d32;
+            --muted: #333333;
+            --text: #000000;
+        }
+
+        @keyframes floatingSeed {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2px, 2px) rotate(5deg); }
+            50% { transform: translate(0, 4px) rotate(0deg); }
+            75% { transform: translate(-2px, 2px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .seed {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            background: #000;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatingSeed 4s infinite ease-in-out;
+        }
+
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .music-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .music-button:hover {
+            transform: scale(1.1);
+        }
+
+        .music-button.paused .music-icon {
+            opacity: 0.7;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            transition: opacity 0.3s;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .audio-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .volume-slider {
+                width: 60px;
+            }
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, 'Segoe UI', Arial;
+            background: var(--bg);
+            color: var(--text);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .wrap {
+            max-width: 1000px;
+            margin: 36px auto;
+            padding: 24px;
+        }
+
+        h1 {
+            color: var(--text);
+            margin: 0 0 30px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(4px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 12px solid var(--accent);
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            height: 12px;
+            background: var(--border);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: -12px;
+            right: -12px;
+            height: 12px;
+            background: var(--border);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .message {
+            display: none;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .card.revealed .message {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .card.revealed .hint {
+            display: none;
+        }
+
+        .audio-player {
+            margin-top: 16px;
+            width: 100%;
+            display: none;
+        }
+
+        .card.revealed .audio-player {
+            display: block;
+            animation: fadeIn 0.5s ease-out 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 680px) {
+            .wrap {
+                margin: 16px auto;
+                padding: 16px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-controls">
+        <audio id="bgMusic" loop>
+            <source src="assets/boba date.mp3" type="audio/mp3">
+        </audio>
+        <button id="musicToggle" class="music-button">
+            <span class="music-icon">🎵</span>
+        </button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+    </div>
+    <div class="wrap">
+        <h1>Minhas 7 maravilhas</h1>
+        <div class="grid">
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Primeira ❤️</p>
+                <p class="message">Minha primeira maravilha é você, uma pessoa muito especial para mim.</p>
+            </div>
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Segunda 💫</p>
+                <p class="message">Seu sorriso. Ele ilumina até os dias mais nublados. Você é o raio de sol que aquece meu coração!</p>
+            </div>
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Terceira 💕</p>
+                <p class="message">Seus olhos. Não consigo parar de olhar para eles, eles me prendem com tanta facilidade, sério!!!</p>
+            </div>
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Quarta 🎵</p>
+                <p class="message">
+                    Sua voz...
+                    <audio class="audio-player" controls>
+                        <source src="assets/bom dia meu bem.mp3" type="audio/mp3">
+                        Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                </p>
+            </div>
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Quinta ✨</p>
+                <p class="message">Seu jeito fofo me encanta todos os dias. Você é simplesmente maravilhosa!</p>
+            </div>
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Sexta 💝</p>
+                <p class="message">Seu jeitinho sapeca, mas com moderação, claro. (ou não, rs)</p>
+            </div>
+            <div class="card" onclick="this.classList.add('revealed')">
+                <p class="hint">Sétima 💖</p>
+                <p class="message">Tudo o que ainda não falei sobre você, pois não cabe tudo em apenas 7 maravilhas.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Background Music Control
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let isPlaying = false;
+
+        // Iniciar música com o primeiro clique na página
+        document.addEventListener('click', function startAudio() {
+            if (!isPlaying) {
+                bgMusic.volume = volumeSlider.value / 100;
+                bgMusic.play()
+                    .then(() => {
+                        isPlaying = true;
+                        musicToggle.classList.remove('paused');
+                    })
+                    .catch(console.error);
+                document.removeEventListener('click', startAudio);
+            }
+        }, { once: true });
+
+        // Controle de Play/Pause
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicToggle.classList.remove('paused');
+            } else {
+                bgMusic.pause();
+                musicToggle.classList.add('paused');
+            }
+        });
+
+        // Controle de Volume
+        volumeSlider.addEventListener('input', () => {
+            bgMusic.volume = volumeSlider.value / 100;
+        });
+
+        // Create animated seeds
+        function createSeeds() {
+            const body = document.body;
+            const numSeeds = 30;
+            
+            for (let i = 0; i < numSeeds; i++) {
+                const seed = document.createElement('div');
+                seed.className = 'seed';
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                seed.style.left = x + '%';
+                seed.style.top = y + '%';
+                
+                // Random animation delay
+                seed.style.animationDelay = (Math.random() * 4) + 's';
+                
+                body.appendChild(seed);
+            }
+        }
+        
+        createSeeds();
+    </script>
+</body>
+</html>
